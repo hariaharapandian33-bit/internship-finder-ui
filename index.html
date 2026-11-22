@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internship Finder</title>
+<style>
+body{font-family:Arial;background:#f2f4f8;margin:0;padding:16px}
+h1{text-align:center}
+input,select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #ccc}
+.card{background:white;padding:16px;border-radius:14px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+button{background:#000;color:white;padding:10px 16px;border:none;border-radius:10px;width:100%}
+</style>
+</head>
+<body>
+<h1>🎓 Internship Finder</h1>
+<input id="search" placeholder="Search - ex: Web Dev, Chennai..." onkeyup="filterJobs()">
+<select id="type" onchange="filterJobs()">
+<option value="">All Types</option>
+<option>Remote</option>
+<option>Chennai</option>
+<option>Online</option>
+</select>
+<div id="list"></div>
+<script>
+let jobs=[
+{name:"Web Development Intern",company:"Zidio",place:"Remote",stipend:"₹10,000/mo"},
+{name:"Python Intern",company:"CodeAlpha",place:"Online",stipend:"₹5,000/mo"},
+{name:"UI/UX Intern",company:"Internshala",place:"Chennai",stipend:"₹8,000/mo"},
+{name:"Data Analyst Intern",company:"SkillVertex",place:"Remote",stipend:"₹12,000/mo"}
+];
+function show(data){
+document.getElementById("list").innerHTML=data.map(j=>`<div class="card"><h3>${j.name}</h3><p>${j.company} • ${j.place}</p><p>💰 ${j.stipend}</p><button>Apply Now</button></div>`).join("");
+}
+function filterJobs(){
+let s=document.getElementById("search").value.toLowerCase();
+let t=document.getElementById("type").value;
+show(jobs.filter(j=>(j.name.toLowerCase().includes(s)||j.company.toLowerCase().includes(s))&&(!t||j.place==t)));
+}
+show(jobs);
+</script>
+</body>
+</html>
